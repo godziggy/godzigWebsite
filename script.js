@@ -5,12 +5,16 @@ function flashRandomNumber() {
   for (let id of elementIds) {
     let randomNumber = Math.floor(Math.random() * 8) + 1;
 
-    let element = document.getElementById(id).textContent = randomNumber;
+    document.getElementById(id).textContent = randomNumber;
 
-    setTimeout(flashRandomNumber, 1000);
   }
+  setTimeout(flashRandomNumber, 1000);
 
   // let randomNumber = Math.floor(Math.random() * 8) + 1; // Generate random number between 1 and 100
+
+  // document.getElementById("random-number").textContent = randomNumber;
+
+  // setTimeout(flashRandomNumber, 1000); // Update every 100 milliseconds
 
 }
 
