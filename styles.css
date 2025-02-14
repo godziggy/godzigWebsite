@@ -151,3 +151,9 @@ p {
 .container {
   height: auto;
 }
+
+
+#red {
+  color: rgba(0,0,168,255);
+  word-spacing: -2px;
+}
