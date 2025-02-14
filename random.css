@@ -1,0 +1,108 @@
+body {
+  background-image: url("imgs/checkers.jpg");
+}
+
+#me {
+  border-radius: 8px;
+  max-width: 65%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#linkedin, #github, #google {
+  max-width: 20%;
+  height: auto;
+}
+
+#musicButton{
+  max-width: 30%;
+  height: auto;
+  margin-top: 15px;
+}
+
+h1, span {
+  font-family: 'fantasy', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 60px;
+  letter-spacing: 6px;
+}
+
+h3, p, h5, h6, a {
+  font-weight: lighter;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+h5, h6 {
+  color: purple;
+  font-weight: 1;
+}
+
+.lang {
+  max-width: 20%;
+  height: auto;
+}
+
+.lang:hover {
+  cursor: grab;
+}
+
+#menav {
+  max-width: 40%;
+  max-height: 60%;
+  border-radius: 100%;
+  border: 1px solid rgb(185, 185, 185);
+  background-color: aliceblue;
+  padding: 5px;
+}
+
+#cardBorder, #me, #projectPhoto, #projects {
+  border: 2px dashed rgb(0, 0, 0);
+  padding: 3px;
+}
+
+.container {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 5px;
+  background-color:violet;
+}
+
+#projects {
+  word-wrap: break-word;
+}
+
+#masterForm {
+  font-size: 30px;
+  background-color: aquamarine;
+}
+
+#degenerate {
+  background-color: aliceblue;
+}
+
+.raaandom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 200px;
+
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+
+}
+
+@keyframes example {
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}

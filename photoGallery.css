@@ -1,0 +1,42 @@
+body {
+  background-image: url("photoGallery/checkersBack.jpg");
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+  border-style: dashed;
+  border-color: brown;
+  border: 5px;
+}
+
+.card-mb {
+  background-color: antiquewhite;
+  max-width: 50%;
+  height: auto;
+  padding: 10px;
+  border-radius: 2%;
+  border-color: brown;
+  border-style: dashed;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Gill Sans';
+  border-style: dashed;
+  border-color: brown;
+}
+
+.col-sm {
+  display: flex;
+  justify-content: center;
+  border-color: blueviolet;
+}
+
+#title {
+  margin-left: 25%;
+}

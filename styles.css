@@ -1,0 +1,145 @@
+h2 {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+
+h2::after {
+  content: '';
+  flex: 1;
+  margin-left: 1rem;
+  height: 5px;
+  background-color: rgba(0,0,168,255);
+  margin-bottom: 0px;
+}
+
+#GodziOS {
+  color: rgba(134, 28, 137, 255);
+  font-weight: light;
+  display: flex;
+  justify-content: center;
+}
+
+div.verticalLineLeft {
+  width: 10px;
+  background-color: rgba(0,0,168,255);
+  height: 100%;
+  float: left;
+
+}
+
+div.verticalLineRight {
+  width: 10px;
+  background-color: rgba(0,0,168,255); 
+  max-height: 100%;
+  float: right; 
+
+}
+
+#soundcloud, #youTube, #x, #tiktok {
+  max-width: 100%;
+  height: auto;
+}
+
+#insta {
+  max-width: 80px;
+  height: auto;
+}
+
+#random {
+  max-width: 60px;
+  height: auto;
+}
+
+#photos {
+  text-align: center;
+}
+
+#randomA {
+  display: flex;
+  justify-content: center;
+}
+
+.col-sm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  padding-top: 30px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+}
+
+div.container-fluid {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+}
+
+.compText {
+  font-family: "Press Start 2P", serif;
+  font-style: normal;
+  margin: 0px;
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: 1000;
+  word-spacing: -1px;
+}
+
+#aqua {
+  color: rgba(98, 90, 209, 255);
+  letter-spacing: .3px;
+  word-spacing: -2px;
+}
+
+div.container {
+  padding: 0px;
+  border: 0px;
+}
+
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+}
+
+#cursor::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  margin-left: -10px;
+  background: black;
+  display: inline-block;
+  animation: cursor-blink 1.5s steps(2) infinite;
+}
+
+.templePics {
+  width: 50%;
+  height: auto;
+}
+
+p {
+  color: rgba(28, 207, 28, 0.746);
+}
+
+#invert {
+  animation: invertAnimation .5s infinite alternate; /* Adjust duration, timing function, and iteration as needed */
+}
+
+@keyframes invertAnimation {
+  0% {
+    filter: invert(0%);
+  }
+  100% {
+    filter: invert(100%);
+  }
+}

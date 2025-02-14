@@ -1,0 +1,21 @@
+body {
+  background-image: url('imgs/notebook.jpg');
+
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container-fluid {
+  margin: 20px;
+}
+
+a, .entries {
+  text-indent: 100px;
+  color: red;
+  font-family: "Nothing You Could Do", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}
