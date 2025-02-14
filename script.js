@@ -8,16 +8,30 @@ function flashRandomNumber() {
     document.getElementById(id).textContent = randomNumber;
 
   }
-  setTimeout(flashRandomNumber, 1000);
-
-  // let randomNumber = Math.floor(Math.random() * 8) + 1; // Generate random number between 1 and 100
-
-  // document.getElementById("random-number").textContent = randomNumber;
-
-  // setTimeout(flashRandomNumber, 1000); // Update every 100 milliseconds
+  setTimeout(flashRandomNumber, 1500);
 
 }
 
 
- // Start flashing on page load
+function dateTime() {
+
+  const d = new Date();
+  const dateString = d.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
+
+document.getElementById("demo").innerHTML = dateString;
+
+setTimeout(dateTime, 1000);
+
+}
+
+
+
  flashRandomNumber();
+ dateTime();
