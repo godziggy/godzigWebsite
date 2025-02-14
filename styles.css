@@ -147,3 +147,7 @@ p {
     filter: invert(100%);
   }
 }
+
+.container {
+  height: auto;
+}
