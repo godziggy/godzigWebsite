@@ -47,6 +47,11 @@ div.verticalLineRight {
   height: auto;
 }
 
+#soundGym {
+  width: 100px;
+  height: auto;
+}
+
 #insta {
   max-width: 80px;
   height: auto;
