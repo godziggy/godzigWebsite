@@ -1,5 +1,6 @@
 body {
   background-image: url("photoGallery/photos2background.png");
+  background-size: 20vw, 20vh;
 }
 
 img {
