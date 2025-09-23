@@ -67,7 +67,7 @@ h5, h6 {
 .raaandom {
   display: flex;
   justify-content: flex-end;
-  margin-top: 100px;
+
   width: 100px;
   height: 100px;
   background-color: red;
@@ -84,6 +84,13 @@ h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.vibe {
+  max-width: 500px;
+  max-height: 300px;
+  border: 20px;
+  border-color: whitesmoke;
 }
 
 @keyframes example {
