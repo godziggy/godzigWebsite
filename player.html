@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>midnight haze player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --bg: #0d0b1e;
+    --purple: #6d28d9;
+    --pink: #ec4899;
+    --glass: rgba(30, 20, 60, 0.4);
+    --text: #e9d5ff;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Drifting smoke background */
+  .smoke {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, var(--purple) 30%, transparent 70%);
+    opacity: 0.07;
+    animation: drift 30s linear infinite;
+    pointer-events: none;
+  }
+  .smoke:nth-child(2) { animation-delay: -10s; opacity: 0.05; }
+  .smoke:nth-child(3) { animation-delay: -20s; opacity: 0.08; transform: rotate(120deg); }
+
+  @keyframes drift {
+    0%   { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+  }
+
+  .container {
+    width: 90%;
+    max-width: 420px;
+    backdrop-filter: blur(16px);
+    background: var(--glass);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), 
+                inset 0 0 30px rgba(109,40,217,0.2);
+    border: 1px solid rgba(109,40,217,0.3);
+    position: relative;
+    z-index: 10;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #a78bfa, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(167,139,250,0.4);
+  }
+
+  .tracklist {
+    max-height: 40vh;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+    padding-right: 8px;
+  }
+  .tracklist::-webkit-scrollbar { width: 6px; }
+  .tracklist::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+  .track {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(109,40,217,0.15);
+  }
+  .track:hover, .track.active {
+    background: rgba(109,40,217,0.4);
+    transform: translateX(6px);
+    box-shadow: 0 0 15px rgba(109,40,217,0.4);
+  }
+  .track.active {
+    border-left: 4px solid var(--pink);
+  }
+
+  /* Cassette player */
+  .player {
+    background: rgba(20,15,40,0.7);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid var(--purple);
+  }
+
+  .cover {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(135deg, #1e1b4b, #4c1d95);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--pink);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .info {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .title { font-size: 1.4rem; font-weight: bold; }
+  .artist { opacity: 0.8; font-size: 1rem; }
+
+  .progress-container {
+    background: rgba(0,0,0,0.3);
+    height: 6px;
+    border-radius: 3px;
+    margin: 1rem 0;
+    cursor: pointer;
+    position: relative;
+  }
+  .progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    border-radius: 3px;
+    transition: width 0.1s;
+  }
+
+  .time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  button {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  button:hover { color: var(--pink); transform: scale(1.15); }
+  #playPause { font-size: 3rem; }
+  .back-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  background: rgba(109,40,217,0.2);
+  border: 1px solid var(--purple);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.back-btn:hover {
+  background: var(--purple);
+  color: #0d0b1e;
+  transform: translateX(-4px);
+  box-shadow: 0 0 20px rgba(109,40,217,0.6);
+}
+
+.back-btn svg {
+  transition: transform 0.3s ease;
+}
+.back-btn:hover svg {
+  transform: translateX(-6px);
+}
+</style>
+</head>
+<body>
+
+<div class="smoke"></div>
+<div class="smoke"></div>
+<div class="smoke"></div>
+
+<!-- Back to home button -->
+<a href="index.html" class="back-btn">
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M19 12H5M12 19l-7-7 7-7"/>
+  </svg>
+  back
+</a>
+
+<div class="container">
+  <h1>haze.fm</h1>
+
+  <div class="tracklist" id="tracklist">
+    <!-- Tracks will be injected by JS -->
+  </div>
+
+  <div class="player">
+    <div class="cover">cassette</div>
+    <div class="info">
+      <div class="title" id="title">click a track</div>
+      <div class="artist" id="artist">unknown</div>
+    </div>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div class="time">
+      <span id="current">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="controls">
+      <button id="prev">previous</button>
+      <button id="playPause">play</button>
+      <button id="next">next</button>
+    </div>
+  </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const playlist = [
+  { title: "calipso", src: "music/boolHiiCutMast.wav" },
+  { title: "AWOL", src: "music/awolmixOzone.wav" },
+  { title: "away", src: "music/blunderrBaall5liimiter.wav" },
+  { title: "bless me 💎💎", src: "music/trimmedChpsOzone3Mix.wav" },
+  { title: "budwise", src: "music/budwisefinal.wav" },
+  // add more here later
+];
+
+let currentTrack = 0;
+let isPlaying = false;
+
+const audio = document.getElementById('audio');
+const tracklist = document.getElementById('tracklist');
+const titleEl = document.getElementById('title');
+const artistEl = document.getElementById('artist');
+const playPauseBtn = document.getElementById('playPause');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current');
+const durationEl = document.getElementById('duration');
+const progressContainer = document.getElementById('progressContainer');
+
+// Build tracklist
+playlist.forEach((track, i) => {
+  const div = document.createElement('div');
+  div.className = 'track';
+  div.textContent = `${track.title}`;
+  div.onclick = () => loadAndPlay(i);
+  tracklist.appendChild(div);
+});
+
+function loadAndPlay(index) {
+  currentTrack = index;
+  audio.src = playlist[index].src;
+  titleEl.textContent = playlist[index].title;
+  artistEl.textContent = playlist[index].artist;
+
+  document.querySelectorAll('.track').forEach((t, i) => 
+    t.classList.toggle('active', i === index)
+  );
+
+  audio.load();
+  // Try to play immediately — if blocked, wait for user click
+  audio.play().then(() => {
+    isPlaying = true;
+    playPauseBtn.textContent = 'pause';
+  }).catch(() => {
+    isPlaying = false;
+    playPauseBtn.textContent = 'play';
+  });
+}
+
+function togglePlayPause() {
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    playPauseBtn.textContent = 'play';
+  } else {
+    audio.play();
+    isPlaying = true;
+    playPauseBtn.textContent = 'pause';
+  }
+}
+
+// === BUTTONS ===
+playPauseBtn.onclick = togglePlayPause;
+prevBtn.onclick = () => loadAndPlay((currentTrack - 1 + playlist.length) % playlist.length);
+nextBtn.onclick = () => loadAndPlay((currentTrack + 1) % playlist.length);
+
+// === AUDIO EVENTS ===
+audio.addEventListener('ended', () => nextBtn.click());
+
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = percent + '%';
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+    durationEl.textContent = formatTime(audio.duration);
+  }
+});
+
+progressContainer.onclick = (e) => {
+  const clickX = e.offsetX;
+  const width = progressContainer.clientWidth;
+  audio.currentTime = (clickX / width) * audio.duration;
+};
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const secs = Math.floor(s % 60);
+  return `${m}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Load first track on page open
+loadAndPlay(0);
+</script>
+<!-- Vinyl crackle overlay (pure vibes) -->
+<audio id="crackle" loop>
+  <source src="music/vinyl-crackle.wav" type="audio/mpeg">
+</audio>
+
+<script>
+// Auto-start that warm dusty vinyl crackle the second the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  const crackle = document.getElementById('crackle');
+  crackle.volume = 0.15; // subtle but sexy
+  crackle.play().catch(() => {
+    // if autoplay blocked, start on first user click anywhere
+    document.body.addEventListener('click', () => crackle.play(), { once: true });
+  });
+});
+</script>
+</body>
+</html>
