@@ -105,13 +105,15 @@ div.container-fluid {
 }
 
 .compText {
-  font-family: "Press Start 2P", serif;
+  /* font-family: "Press Start 2P", serif; */
+  font-family: "VT323", monospace;
   font-style: normal;
+  font-weight: 4000;
   margin: 0px;
-  line-height: 20px;
-  font-size: 15px;
-  font-weight: 1000;
+  line-height: 25px;
+  font-size: 41px;
   word-spacing: -1px;
+  font-style: bold;
 }
 
 #aqua {
