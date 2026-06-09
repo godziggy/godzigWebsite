@@ -67,6 +67,11 @@ div.verticalLineRight {
   height: auto;
 }
 
+#depop {
+  max-width: 70px;
+  height: auto;
+}
+
 #random {
   max-width: 60px;
   height: auto;
