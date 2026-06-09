@@ -1,5 +1,8 @@
 body {
-  height: 100vh;
+  /* height: 100vh;
+  overscroll-behavior-y: contain; */
+  height: auto;           /* or min-height: 100vh */
+
 }
 
 h2 {
